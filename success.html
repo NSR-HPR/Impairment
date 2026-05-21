@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submission Received | National Safety & Risk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Serif+4:wght@300;400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1B2A4A; --navy-dark: #111C33; --steel: #4A6FA5;
+      --sky: #B8CBE4; --sky-light: #D6E4F0; --red: #C0272D;
+      --white: #FFFFFF; --off-white: #F4F7FB; --gray: #9AABBD;
+      --border: #C8D8E8; --success: #1A7A4A;
+    }
+    body {
+      font-family: 'Source Serif 4', serif;
+      background: var(--navy-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--navy);
+      border-bottom: 4px solid var(--red);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    header img { height: 55px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
+    header span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 60px 48px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+      animation: pop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes pop {
+      from { opacity:0; transform: scale(0.92) translateY(20px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+    .check-circle {
+      width: 80px; height: 80px;
+      background: #E8F5EE;
+      border: 3px solid var(--success);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 2.2rem;
+    }
+    h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #5B7290;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .ref-box {
+      background: var(--sky-light);
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 20px;
+      margin-bottom: 28px;
+      display: inline-block;
+    }
+    .ref-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--steel);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .ref-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--navy);
+      letter-spacing: 0.05em;
+    }
+    .next-steps {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+    .next-steps h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      background: var(--navy);
+      color: var(--white);
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step p { font-size: 0.8rem; color: #5B7290; line-height: 1.5; }
+    .step strong { color: var(--navy); }
+    .btn {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--navy);
+      border: none;
+      padding: 13px 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #243557; }
+    footer {
+      background: var(--navy-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 16px 32px;
+      text-align: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gray);
+    }
+    footer a { color: #7494C1; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="NSR.png" alt="National Safety & Risk" />
+    <span>Sprinkler Impairment Notification</span>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="check-circle">✅</div>
+      <h1>Notification Received</h1>
+      <p class="subtitle">
+        Your sprinkler system impairment notification has been successfully submitted to
+        <strong>National Safety &amp; Risk</strong>. A confirmation email has been sent to the
+        contact address you provided.
+      </p>
+
+      <div class="ref-box">
+        <div class="ref-label">Submission Reference</div>
+        <div class="ref-number" id="refNum">Generating...</div>
+      </div>
+
+      <div class="next-steps">
+        <h3>What Happens Next</h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <p><strong>Confirmation Email</strong> — You will receive an automated confirmation email with your submission details within minutes.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p><strong>NSR Review</strong> — Our team will review your impairment notification and log it in accordance with NFPA 25 requirements.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p><strong>Follow-Up Notification</strong> — You will receive a follow-up email confirming receipt and any additional instructions or requirements.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <p><strong>Restoration Confirmation</strong> — When your system is restored, please notify NSR so we can update our records per <strong>NFPA 25 § 15.6</strong>.</p>
+        </div>
+      </div>
+
+      <a href="index.html" class="btn">Submit Another Impairment</a>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 National Safety &amp; Risk &nbsp;|&nbsp; NFPA 25 Compliant Impairment Program &nbsp;|&nbsp;
+    <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a>
+  </footer>
+
+  <script>
+    function generateRef() {
+      const d = new Date();
+      const yr = d.getFullYear();
+      const mo = String(d.getMonth()+1).padStart(2,'0');
+      const dy = String(d.getDate()).padStart(2,'0');
+      const rnd = Math.floor(1000 + Math.random() * 9000);
+      return `NSR-IMP-${yr}${mo}${dy}-${rnd}`;
+    }
+    document.getElementById('refNum').textContent = generateRef();
+  </script>
+</body>
+</html>
