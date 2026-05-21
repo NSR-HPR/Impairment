@@ -9,911 +9,202 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy:       #1B2A4A;
-      --navy-dark:  #111C33;
-      --navy-mid:   #243557;
-      --steel:      #4A6FA5;
-      --steel-light:#7494C1;
-      --sky:        #B8CBE4;
-      --sky-light:  #D6E4F0;
-      --red:        #C0272D;
-      --red-dark:   #8B1A1F;
-      --white:      #FFFFFF;
-      --off-white:  #F4F7FB;
-      --gray-light: #E8EDF4;
-      --gray:       #9AABBD;
-      --text:       #1B2A4A;
-      --text-muted: #5B7290;
-      --success:    #1A7A4A;
-      --warning:    #B8651A;
-      --border:     #C8D8E8;
-      --radius:     6px;
-      --shadow:     0 4px 24px rgba(27,42,74,0.12);
-      --shadow-sm:  0 2px 8px rgba(27,42,74,0.08);
+      --navy:#1B2A4A;--navy-dark:#111C33;--navy-mid:#243557;--steel:#4A6FA5;
+      --steel-light:#7494C1;--sky:#B8CBE4;--sky-light:#D6E4F0;--red:#C0272D;
+      --red-dark:#8B1A1F;--white:#FFFFFF;--off-white:#F4F7FB;--gray-light:#E8EDF4;
+      --gray:#9AABBD;--text:#1B2A4A;--text-muted:#5B7290;--success:#1A7A4A;
+      --warning:#B8651A;--border:#C8D8E8;--radius:6px;
+      --shadow:0 4px 24px rgba(27,42,74,0.12);--shadow-sm:0 2px 8px rgba(27,42,74,0.08);
     }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Source Serif 4', Georgia, serif;
-      background: var(--navy-dark);
-      color: var(--text);
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Background texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(74,111,165,0.18) 0%, transparent 70%),
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.015) 39px, rgba(255,255,255,0.015) 40px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .page-wrapper {
-      position: relative;
-      z-index: 1;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 20px 80px;
-    }
-
-    /* ── HEADER ── */
-    .site-header {
-      background: var(--navy);
-      border-bottom: 4px solid var(--red);
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .site-header::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--red) 0%, var(--red-dark) 40%, transparent 100%);
-    }
-    .header-inner {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 28px 32px 24px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .header-logo {
-      height: 70px;
-      width: auto;
-      flex-shrink: 0;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
-    }
-    .header-text { flex: 1; }
-    .header-text h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.65rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1.15;
-    }
-    .header-text h1 span {
-      color: var(--sky);
-      display: block;
-      font-weight: 400;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      margin-top: 3px;
-    }
-    .header-badge {
-      background: var(--red);
-      color: var(--white);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      padding: 5px 10px;
-      border-radius: 3px;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* ── NFPA NOTICE BANNER ── */
-    .nfpa-banner {
-      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 100%);
-      border-left: 5px solid var(--red);
-      border-radius: 0 var(--radius) var(--radius) 0;
-      padding: 18px 24px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow-sm);
-    }
-    .nfpa-banner-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--sky);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nfpa-banner-title::before {
-      content: '⚠';
-      font-size: 0.9rem;
-      color: var(--red);
-    }
-    .nfpa-banner p {
-      font-size: 0.83rem;
-      color: var(--sky-light);
-      line-height: 1.6;
-    }
-    .nfpa-banner strong { color: var(--white); }
-
-    /* ── FORM CARD ── */
-    .form-card {
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .section-header {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-      padding: 16px 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .section-header .section-num {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.68rem;
-      font-weight: 500;
-      color: var(--sky);
-      letter-spacing: 0.1em;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(184,203,228,0.3);
-      padding: 3px 8px;
-      border-radius: 3px;
-      flex-shrink: 0;
-    }
-    .section-header h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .section-body {
-      padding: 28px 28px 24px;
-    }
-
-    /* ── FORM FIELDS ── */
-    .field-grid {
-      display: grid;
-      gap: 20px;
-    }
-    .field-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-    .field-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-
-    .field-group { display: flex; flex-direction: column; gap: 6px; }
-    .field-group.span-2 { grid-column: span 2; }
-    .field-group.span-3 { grid-column: span 3; }
-
-    label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--navy);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    label .req { color: var(--red); font-size: 0.85em; }
-    label .nfpa-ref {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      font-weight: 500;
-      color: var(--steel);
-      background: var(--sky-light);
-      border: 1px solid var(--border);
-      padding: 1px 5px;
-      border-radius: 3px;
-      margin-left: 4px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      font-family: 'Source Serif 4', serif;
-      font-size: 0.92rem;
-      color: var(--text);
-      background: var(--off-white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px 14px;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--steel);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(74,111,165,0.15);
-    }
-    input::placeholder, textarea::placeholder { color: var(--gray); font-style: italic; }
-    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6FA5' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
-    textarea { resize: vertical; min-height: 90px; line-height: 1.55; }
-
-    .field-hint {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-      font-style: italic;
-    }
-
-    /* ── IMPAIRMENT TYPE CARDS ── */
-    .impairment-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .impairment-option { display: none; }
-    .impairment-label {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 7px;
-      padding: 14px 10px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--off-white);
-      cursor: pointer;
-      transition: all 0.18s;
-      text-align: center;
-    }
-    .impairment-label:hover {
-      border-color: var(--steel);
-      background: var(--sky-light);
-    }
-    .impairment-option:checked + .impairment-label {
-      border-color: var(--navy);
-      background: var(--navy);
-      color: var(--white);
-    }
-    .impairment-icon { font-size: 1.6rem; line-height: 1; }
-    .impairment-name {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-    .impairment-option:checked + .impairment-label .impairment-name { color: var(--sky); }
-    .impairment-desc {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      line-height: 1.3;
-    }
-    .impairment-option:checked + .impairment-label .impairment-desc { color: rgba(255,255,255,0.7); }
-
-    /* ── DIVIDER ── */
-    .section-divider {
-      height: 1px;
-      background: var(--gray-light);
-      margin: 4px 0 24px;
-    }
-
-    /* ── IMPAIRMENT COORDINATOR BOX ── */
-    .coordinator-box {
-      background: linear-gradient(135deg, #FFF8F0 0%, #FEF2E4 100%);
-      border: 1.5px solid #E8C99A;
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-top: 8px;
-    }
-    .coordinator-box-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: var(--warning);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .coordinator-box-title::before { content: '📋'; }
-
-    /* ── CHECKLIST ── */
-    .checklist { display: flex; flex-direction: column; gap: 10px; }
-    .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 14px;
-      background: var(--off-white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: border-color 0.15s;
-    }
-    .check-item:hover { border-color: var(--steel); }
-    .check-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      margin-top: 1px;
-      accent-color: var(--navy);
-      cursor: pointer;
-    }
-    .check-item-text { flex: 1; }
-    .check-item-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--navy);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .check-item-desc {
-      font-size: 0.73rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      line-height: 1.4;
-    }
-
-    /* ── SUBMIT AREA ── */
-    .submit-area {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
-      border-radius: 10px;
-      padding: 32px 28px;
-      box-shadow: var(--shadow);
-    }
-    .submit-notice {
-      background: rgba(192,39,45,0.15);
-      border: 1px solid rgba(192,39,45,0.4);
-      border-radius: var(--radius);
-      padding: 12px 18px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .submit-notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-    .submit-notice p {
-      font-size: 0.8rem;
-      color: var(--sky-light);
-      line-height: 1.55;
-    }
-    .submit-notice strong { color: var(--white); }
-
-    .submit-btn {
-      width: 100%;
-      padding: 16px 32px;
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      box-shadow: 0 4px 16px rgba(192,39,45,0.35);
-      position: relative;
-      overflow: hidden;
-    }
-    .submit-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
-    }
-    .submit-btn:hover {
-      background: var(--red-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(192,39,45,0.45);
-    }
-    .submit-btn:active { transform: translateY(0); }
-
-    .submit-meta {
-      margin-top: 14px;
-      font-size: 0.72rem;
-      color: var(--gray);
-      text-align: center;
-      line-height: 1.5;
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    /* ── SUCCESS STATE ── */
-    .success-card {
-      display: none;
-      background: var(--white);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      padding: 56px 40px;
-      text-align: center;
-    }
-    .success-card.visible { display: block; }
-    .success-icon {
-      font-size: 3.5rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-    .success-card h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .success-card p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 480px;
-      margin: 0 auto 24px;
-    }
-    .success-ref {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--steel);
-      background: var(--sky-light);
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      display: inline-block;
-      margin-bottom: 24px;
-    }
-    .success-card .new-btn {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--navy);
-      border: none;
-      padding: 12px 28px;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .success-card .new-btn:hover { background: var(--navy-mid); }
-
-    /* ── FOOTER ── */
-    .site-footer {
-      background: var(--navy-dark);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 20px 32px;
-      text-align: center;
-    }
-    .site-footer p {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--gray);
-      line-height: 1.8;
-      letter-spacing: 0.03em;
-    }
-    .site-footer a { color: var(--steel-light); text-decoration: none; }
-    .site-footer a:hover { color: var(--sky); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .header-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .header-badge { align-self: flex-start; }
-      .field-grid.cols-2, .field-grid.cols-3 { grid-template-columns: 1fr; }
-      .field-group.span-2, .field-group.span-3 { grid-column: span 1; }
-      .impairment-grid { grid-template-columns: 1fr 1fr; }
-      .section-body { padding: 20px 18px; }
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .form-card, .nfpa-banner, .submit-area {
-      animation: fadeUp 0.45s ease both;
-    }
-    .form-card:nth-child(2) { animation-delay: 0.08s; }
-    .form-card:nth-child(3) { animation-delay: 0.16s; }
-    .form-card:nth-child(4) { animation-delay: 0.24s; }
-    .submit-area            { animation-delay: 0.32s; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Source Serif 4',Georgia,serif;background:var(--navy-dark);color:var(--text);min-height:100vh;position:relative;overflow-x:hidden;}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(74,111,165,0.18) 0%,transparent 70%),repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.015) 39px,rgba(255,255,255,0.015) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.015) 39px,rgba(255,255,255,0.015) 40px);pointer-events:none;z-index:0;}
+    .page-wrapper{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+    .site-header{background:var(--navy);border-bottom:4px solid var(--red);padding:0;position:relative;overflow:hidden;}
+    .header-inner{max-width:860px;margin:0 auto;padding:28px 32px 24px;display:flex;align-items:center;gap:28px;}
+    .header-logo{height:70px;width:auto;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));}
+    .header-text{flex:1;}
+    .header-text h1{font-family:'Oswald',sans-serif;font-size:1.65rem;font-weight:700;color:var(--white);letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;}
+    .header-text h1 span{color:var(--sky);display:block;font-weight:400;font-size:0.85rem;letter-spacing:0.12em;margin-top:3px;}
+    .header-badge{background:var(--red);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:500;letter-spacing:0.08em;padding:5px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+    .nfpa-banner{background:linear-gradient(135deg,var(--navy-mid) 0%,var(--navy) 100%);border-left:5px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm);}
+    .nfpa-banner-title{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;color:var(--sky);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+    .nfpa-banner-title::before{content:'⚠';font-size:0.9rem;color:var(--red);}
+    .nfpa-banner p{font-size:0.83rem;color:var(--sky-light);line-height:1.6;}
+    .nfpa-banner strong{color:var(--white);}
+    .form-card{background:var(--white);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px;}
+    .section-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:16px 28px;display:flex;align-items:center;gap:12px;}
+    .section-header .section-num{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:500;color:var(--sky);letter-spacing:0.1em;background:rgba(255,255,255,0.1);border:1px solid rgba(184,203,228,0.3);padding:3px 8px;border-radius:3px;flex-shrink:0;}
+    .section-header h2{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;}
+    .section-body{padding:28px 28px 24px;}
+    .field-grid{display:grid;gap:20px;}
+    .field-grid.cols-2{grid-template-columns:1fr 1fr;}
+    .field-group{display:flex;flex-direction:column;gap:6px;}
+    .field-group.span-2{grid-column:span 2;}
+    label{font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;color:var(--navy);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+    label .req{color:var(--red);font-size:0.85em;}
+    label .nfpa-ref{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:var(--steel);background:var(--sky-light);border:1px solid var(--border);padding:1px 5px;border-radius:3px;margin-left:4px;}
+    input,select,textarea{width:100%;font-family:'Source Serif 4',serif;font-size:0.92rem;color:var(--text);background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;outline:none;-webkit-appearance:none;appearance:none;}
+    input:focus,select:focus,textarea:focus{border-color:var(--steel);background:var(--white);box-shadow:0 0 0 3px rgba(74,111,165,0.15);}
+    input::placeholder,textarea::placeholder{color:var(--gray);font-style:italic;}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234A6FA5' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+    textarea{resize:vertical;min-height:90px;line-height:1.55;}
+    .field-hint{font-size:0.74rem;color:var(--text-muted);line-height:1.4;font-style:italic;}
+    .impairment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .impairment-option{display:none;}
+    .impairment-label{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 10px;border:2px solid var(--border);border-radius:var(--radius);background:var(--off-white);cursor:pointer;transition:all 0.18s;text-align:center;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);}
+    .impairment-label:hover{border-color:var(--steel);background:var(--sky-light);}
+    .impairment-option:checked+.impairment-label{border-color:var(--navy);background:var(--navy);color:var(--white);}
+    .impairment-icon{font-size:1.6rem;line-height:1;}
+    .impairment-name{font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--navy);line-height:1.2;}
+    .impairment-option:checked+.impairment-label .impairment-name{color:var(--sky);}
+    .impairment-desc{font-size:0.65rem;color:var(--text-muted);line-height:1.3;}
+    .impairment-option:checked+.impairment-label .impairment-desc{color:rgba(255,255,255,0.7);}
+    .section-divider{height:1px;background:var(--gray-light);margin:4px 0 24px;}
+    .coordinator-box{background:linear-gradient(135deg,#FFF8F0 0%,#FEF2E4 100%);border:1.5px solid #E8C99A;border-radius:var(--radius);padding:16px 20px;margin-top:8px;}
+    .coordinator-box-title{font-family:'Oswald',sans-serif;font-size:0.7rem;font-weight:600;color:var(--warning);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+    .coordinator-box-title::before{content:'📋';}
+    .checklist{display:flex;flex-direction:column;gap:10px;}
+    .check-item{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color 0.15s;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);}
+    .check-item:hover{border-color:var(--steel);}
+    .check-item input[type="checkbox"]{width:18px!important;height:18px!important;min-width:18px;padding:0!important;background:var(--white)!important;border:1.5px solid var(--border)!important;box-shadow:none!important;-webkit-appearance:checkbox!important;appearance:checkbox!important;flex-shrink:0;margin-top:1px;accent-color:var(--navy);cursor:pointer;}
+    .check-item-text{flex:1;}
+    .check-item-label{font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;color:var(--navy);letter-spacing:0.04em;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+    .check-item-desc{font-size:0.73rem;color:var(--text-muted);margin-top:2px;line-height:1.4;}
+    .submit-area{background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%);border-radius:10px;padding:32px 28px;box-shadow:var(--shadow);}
+    .submit-notice{background:rgba(192,39,45,0.15);border:1px solid rgba(192,39,45,0.4);border-radius:var(--radius);padding:12px 18px;margin-bottom:22px;display:flex;align-items:flex-start;gap:10px;}
+    .submit-notice-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+    .submit-notice p{font-size:0.8rem;color:var(--sky-light);line-height:1.55;}
+    .submit-notice strong{color:var(--white);}
+    .submit-btn{width:100%;padding:16px 32px;background:var(--red);color:var(--white);font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;border-radius:var(--radius);cursor:pointer;transition:background 0.2s,transform 0.1s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(192,39,45,0.35);position:relative;overflow:hidden;}
+    .submit-btn:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(192,39,45,0.45);}
+    .submit-meta{margin-top:14px;font-size:0.72rem;color:var(--gray);text-align:center;line-height:1.5;font-family:'IBM Plex Mono',monospace;}
+    .site-footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.08);padding:20px 32px;text-align:center;}
+    .site-footer p{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gray);line-height:1.8;letter-spacing:0.03em;}
+    .site-footer a{color:var(--steel-light);text-decoration:none;}
+    @media(max-width:640px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;}.field-grid.cols-2{grid-template-columns:1fr;}.field-group.span-2{grid-column:span 1;}.impairment-grid{grid-template-columns:1fr 1fr;}.section-body{padding:20px 18px;}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+    .form-card,.nfpa-banner,.submit-area{animation:fadeUp 0.45s ease both;}
+    .form-card:nth-child(2){animation-delay:0.08s;}.form-card:nth-child(3){animation-delay:0.16s;}.form-card:nth-child(4){animation-delay:0.24s;}.submit-area{animation-delay:0.32s;}
   </style>
 </head>
 <body>
-
-<!-- ── HEADER ── -->
 <header class="site-header">
   <div class="header-inner">
     <img src="NSR.png" alt="National Safety & Risk" class="header-logo" />
     <div class="header-text">
-      <h1>
-        Sprinkler System Impairment Notification
-        <span>Fire Protection Impairment Program</span>
-      </h1>
+      <h1>Sprinkler System Impairment Notification<span>Fire Protection Impairment Program</span></h1>
     </div>
     <div class="header-badge">NFPA 25 Compliant</div>
   </div>
 </header>
-
-<!-- ── PAGE WRAPPER ── -->
 <div class="page-wrapper">
-
-  <!-- NFPA Notice -->
   <div class="nfpa-banner">
     <div class="nfpa-banner-title">NFPA 25 — Impairment Notification Requirement</div>
-    <p>
-      Per <strong>NFPA 25 (Standard for the Inspection, Testing, and Maintenance of Water-Based Fire Protection Systems)</strong>,
-      all sprinkler system impairments — planned or emergency — must be reported to the property owner/occupant,
-      the Authority Having Jurisdiction (AHJ), and the monitoring company prior to or immediately upon the start of impairment.
-      This form initiates the required notification process with <strong>National Safety &amp; Risk</strong>.
-    </p>
+    <p>Per <strong>NFPA 25 (Standard for the Inspection, Testing, and Maintenance of Water-Based Fire Protection Systems)</strong>, all sprinkler system impairments — planned or emergency — must be reported to the property owner/occupant, the Authority Having Jurisdiction (AHJ), and the monitoring company prior to or immediately upon the start of impairment. This form initiates the required notification process with <strong>National Safety &amp; Risk</strong>.</p>
   </div>
-
   <form name="sprinkler-impairment" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="impairmentForm">
     <input type="hidden" name="form-name" value="sprinkler-impairment" />
     <p style="display:none"><input name="bot-field" /></p>
-
-    <!-- ── SECTION 1: Customer & Property Info ── -->
     <div class="form-card">
-      <div class="section-header">
-        <span class="section-num">SEC. 01</span>
-        <h2>Customer &amp; Property Information</h2>
-      </div>
+      <div class="section-header"><span class="section-num">SEC. 01</span><h2>Customer &amp; Property Information</h2></div>
       <div class="section-body">
         <div class="field-grid cols-2">
-          <div class="field-group">
-            <label for="customer_name">Customer / Company Name <span class="req">*</span></label>
-            <input type="text" id="customer_name" name="customer_name" required placeholder="Acme Corporation" />
-          </div>
-          <div class="field-group">
-            <label for="property_name">Property / Facility Name</label>
-            <input type="text" id="property_name" name="property_name" placeholder="Main Street Office Building" />
-          </div>
-          <div class="field-group span-2">
-            <label for="property_address">Property Address <span class="req">*</span></label>
-            <input type="text" id="property_address" name="property_address" required placeholder="123 Main Street, City, State, ZIP" />
-          </div>
-          <div class="field-group">
-            <label for="contact_name">On-Site Contact Name <span class="req">*</span></label>
-            <input type="text" id="contact_name" name="contact_name" required placeholder="John Smith" />
-          </div>
-          <div class="field-group">
-            <label for="contact_title">Contact Title / Role</label>
-            <input type="text" id="contact_title" name="contact_title" placeholder="Facilities Manager" />
-          </div>
-          <div class="field-group">
-            <label for="contact_email">Contact Email <span class="req">*</span></label>
-            <input type="email" id="contact_email" name="email" required placeholder="contact@company.com" />
-          </div>
-          <div class="field-group">
-            <label for="contact_phone">Contact Phone Number <span class="req">*</span></label>
-            <input type="tel" id="contact_phone" name="contact_phone" required placeholder="(555) 000-0000" />
-          </div>
-          <div class="field-group">
-            <label for="alt_contact_name">Alternate Contact Name</label>
-            <input type="text" id="alt_contact_name" name="alt_contact_name" placeholder="Jane Doe" />
-          </div>
-          <div class="field-group">
-            <label for="alt_contact_phone">Alternate Contact Phone</label>
-            <input type="tel" id="alt_contact_phone" name="alt_contact_phone" placeholder="(555) 000-0001" />
-          </div>
+          <div class="field-group"><label for="customer_name">Customer / Company Name <span class="req">*</span></label><input type="text" id="customer_name" name="customer_name" required placeholder="Acme Corporation" /></div>
+          <div class="field-group"><label for="property_name">Property / Facility Name</label><input type="text" id="property_name" name="property_name" placeholder="Main Street Office Building" /></div>
+          <div class="field-group span-2"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" required placeholder="123 Main Street, City, State, ZIP" /></div>
+          <div class="field-group"><label for="contact_name">On-Site Contact Name <span class="req">*</span></label><input type="text" id="contact_name" name="contact_name" required placeholder="John Smith" /></div>
+          <div class="field-group"><label for="contact_title">Contact Title / Role</label><input type="text" id="contact_title" name="contact_title" placeholder="Facilities Manager" /></div>
+          <div class="field-group"><label for="contact_email">Contact Email <span class="req">*</span></label><input type="email" id="contact_email" name="email" required placeholder="contact@company.com" /></div>
+          <div class="field-group"><label for="contact_phone">Contact Phone Number <span class="req">*</span></label><input type="tel" id="contact_phone" name="contact_phone" required placeholder="(555) 000-0000" /></div>
+          <div class="field-group"><label for="alt_contact_name">Alternate Contact Name</label><input type="text" id="alt_contact_name" name="alt_contact_name" placeholder="Jane Doe" /></div>
+          <div class="field-group"><label for="alt_contact_phone">Alternate Contact Phone</label><input type="tel" id="alt_contact_phone" name="alt_contact_phone" placeholder="(555) 000-0001" /></div>
         </div>
       </div>
     </div>
-
-    <!-- ── SECTION 2: Impairment Details ── -->
     <div class="form-card">
-      <div class="section-header">
-        <span class="section-num">SEC. 02</span>
-        <h2>Impairment Classification &amp; Details</h2>
-      </div>
+      <div class="section-header"><span class="section-num">SEC. 02</span><h2>Impairment Classification &amp; Details</h2></div>
       <div class="section-body">
-
         <div class="field-group" style="margin-bottom:22px;">
           <label>Impairment Type <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.2</span></label>
           <div class="impairment-grid">
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_planned" name="impairment_type" value="Planned Impairment" required />
-              <label for="type_planned" class="impairment-label">
-                <span class="impairment-icon">📅</span>
-                <span class="impairment-name">Planned</span>
-                <span class="impairment-desc">Scheduled maintenance, testing, or system work</span>
-              </label>
-            </div>
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_emergency" name="impairment_type" value="Emergency Impairment" />
-              <label for="type_emergency" class="impairment-label">
-                <span class="impairment-icon">🚨</span>
-                <span class="impairment-name">Emergency</span>
-                <span class="impairment-desc">Unplanned break, leak, or system failure</span>
-              </label>
-            </div>
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_partial" name="impairment_type" value="Partial Impairment" />
-              <label for="type_partial" class="impairment-label">
-                <span class="impairment-icon">🔶</span>
-                <span class="impairment-name">Partial</span>
-                <span class="impairment-desc">Portion of system out of service</span>
-              </label>
-            </div>
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_full" name="impairment_type" value="Full System Impairment" />
-              <label for="type_full" class="impairment-label">
-                <span class="impairment-icon">🔴</span>
-                <span class="impairment-name">Full System</span>
-                <span class="impairment-desc">Entire system out of service</span>
-              </label>
-            </div>
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_dry" name="impairment_type" value="Dry System Impairment" />
-              <label for="type_dry" class="impairment-label">
-                <span class="impairment-icon">💨</span>
-                <span class="impairment-name">Dry System</span>
-                <span class="impairment-desc">Dry-pipe or pre-action system impaired</span>
-              </label>
-            </div>
-
-            <div>
-              <input type="radio" class="impairment-option" id="type_other" name="impairment_type" value="Other" />
-              <label for="type_other" class="impairment-label">
-                <span class="impairment-icon">📝</span>
-                <span class="impairment-name">Other</span>
-                <span class="impairment-desc">See description below</span>
-              </label>
-            </div>
-
+            <div><input type="radio" class="impairment-option" id="type_planned" name="impairment_type" value="Planned Impairment" required /><label for="type_planned" class="impairment-label"><span class="impairment-icon">📅</span><span class="impairment-name">Planned</span><span class="impairment-desc">Scheduled maintenance, testing, or system work</span></label></div>
+            <div><input type="radio" class="impairment-option" id="type_emergency" name="impairment_type" value="Emergency Impairment" /><label for="type_emergency" class="impairment-label"><span class="impairment-icon">🚨</span><span class="impairment-name">Emergency</span><span class="impairment-desc">Unplanned break, leak, or system failure</span></label></div>
+            <div><input type="radio" class="impairment-option" id="type_partial" name="impairment_type" value="Partial Impairment" /><label for="type_partial" class="impairment-label"><span class="impairment-icon">🔶</span><span class="impairment-name">Partial</span><span class="impairment-desc">Portion of system out of service</span></label></div>
+            <div><input type="radio" class="impairment-option" id="type_full" name="impairment_type" value="Full System Impairment" /><label for="type_full" class="impairment-label"><span class="impairment-icon">🔴</span><span class="impairment-name">Full System</span><span class="impairment-desc">Entire system out of service</span></label></div>
+            <div><input type="radio" class="impairment-option" id="type_dry" name="impairment_type" value="Dry System Impairment" /><label for="type_dry" class="impairment-label"><span class="impairment-icon">💨</span><span class="impairment-name">Dry System</span><span class="impairment-desc">Dry-pipe or pre-action system impaired</span></label></div>
+            <div><input type="radio" class="impairment-option" id="type_other" name="impairment_type" value="Other" /><label for="type_other" class="impairment-label"><span class="impairment-icon">📝</span><span class="impairment-name">Other</span><span class="impairment-desc">See description below</span></label></div>
           </div>
         </div>
-
         <div class="section-divider"></div>
-
         <div class="field-grid cols-2">
-          <div class="field-group">
-            <label for="system_affected">System / Zone Affected <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.3</span></label>
-            <input type="text" id="system_affected" name="system_affected" required placeholder="e.g. Zone 3 — 2nd Floor East Wing" />
-          </div>
-          <div class="field-group">
-            <label for="area_affected">Area / Location Description <span class="req">*</span></label>
-            <input type="text" id="area_affected" name="area_affected" required placeholder="e.g. Server Room, Floors 2–4" />
-          </div>
-          <div class="field-group">
-            <label for="heads_affected">Number of Sprinkler Heads Affected <span class="nfpa-ref">NFPA 25 § 15.3.2</span></label>
-            <input type="number" id="heads_affected" name="heads_affected" min="0" placeholder="e.g. 24" />
-          </div>
-          <div class="field-group">
-            <label for="reason_for_impairment">Reason for Impairment <span class="req">*</span></label>
-            <select id="reason_for_impairment" name="reason_for_impairment" required>
-              <option value="">— Select Reason —</option>
-              <option>Annual Inspection / Testing</option>
-              <option>Pipe Repair / Replacement</option>
-              <option>System Modification / Expansion</option>
-              <option>Valve Repair or Replacement</option>
-              <option>Pipe Break / Leak</option>
-              <option>Freeze Damage</option>
-              <option>Construction / Renovation</option>
-              <option>Component Failure</option>
-              <option>Water Supply Issue</option>
-              <option>Other (describe below)</option>
-            </select>
-          </div>
-          <div class="field-group">
-            <label for="impairment_start">Impairment Start Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label>
-            <input type="datetime-local" id="impairment_start" name="impairment_start" required />
-          </div>
-          <div class="field-group">
-            <label for="estimated_restoration">Estimated Restoration Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label>
-            <input type="datetime-local" id="estimated_restoration" name="estimated_restoration" required />
-          </div>
-          <div class="field-group span-2">
-            <label for="impairment_description">Detailed Description of Impairment <span class="req">*</span></label>
-            <textarea id="impairment_description" name="impairment_description" required placeholder="Describe the nature of the impairment, specific system components affected, work to be performed, and any relevant conditions..."></textarea>
-          </div>
+          <div class="field-group"><label for="system_affected">System / Zone Affected <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.3</span></label><input type="text" id="system_affected" name="system_affected" required placeholder="e.g. Zone 3 — 2nd Floor East Wing" /></div>
+          <div class="field-group"><label for="area_affected">Area / Location Description <span class="req">*</span></label><input type="text" id="area_affected" name="area_affected" required placeholder="e.g. Server Room, Floors 2–4" /></div>
+          <div class="field-group"><label for="heads_affected">Number of Sprinkler Heads Affected <span class="nfpa-ref">NFPA 25 § 15.3.2</span></label><input type="number" id="heads_affected" name="heads_affected" min="0" placeholder="e.g. 24" /></div>
+          <div class="field-group"><label for="reason_for_impairment">Reason for Impairment <span class="req">*</span></label><select id="reason_for_impairment" name="reason_for_impairment" required><option value="">— Select Reason —</option><option>Annual Inspection / Testing</option><option>Pipe Repair / Replacement</option><option>System Modification / Expansion</option><option>Valve Repair or Replacement</option><option>Pipe Break / Leak</option><option>Freeze Damage</option><option>Construction / Renovation</option><option>Component Failure</option><option>Water Supply Issue</option><option>Other (describe below)</option></select></div>
+          <div class="field-group"><label for="impairment_start">Impairment Start Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label><input type="datetime-local" id="impairment_start" name="impairment_start" required /></div>
+          <div class="field-group"><label for="estimated_restoration">Estimated Restoration Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label><input type="datetime-local" id="estimated_restoration" name="estimated_restoration" required /></div>
+          <div class="field-group span-2"><label for="impairment_description">Detailed Description of Impairment <span class="req">*</span></label><textarea id="impairment_description" name="impairment_description" required placeholder="Describe the nature of the impairment, specific system components affected, work to be performed, and any relevant conditions..."></textarea></div>
         </div>
       </div>
     </div>
-
-    <!-- ── SECTION 3: Contractor / Impairment Coordinator ── -->
     <div class="form-card">
-      <div class="section-header">
-        <span class="section-num">SEC. 03</span>
-        <h2>Impairment Coordinator &amp; Contractor Information</h2>
-      </div>
+      <div class="section-header"><span class="section-num">SEC. 03</span><h2>Impairment Coordinator &amp; Contractor Information</h2></div>
       <div class="section-body">
         <div class="coordinator-box">
           <div class="coordinator-box-title">NFPA 25 § 15.4 — Impairment Coordinator</div>
-          <p style="font-size:0.78rem;color:#7A4A10;line-height:1.5;">
-            NFPA 25 requires the property owner or designated representative to assign an <strong>Impairment Coordinator</strong>
-            responsible for notifying the fire department, insurance carrier, alarm company, and building occupants.
-          </p>
+          <p style="font-size:0.78rem;color:#7A4A10;line-height:1.5;">NFPA 25 requires the property owner or designated representative to assign an <strong>Impairment Coordinator</strong> responsible for notifying the fire department, insurance carrier, alarm company, and building occupants.</p>
         </div>
         <div style="height:20px;"></div>
         <div class="field-grid cols-2">
-          <div class="field-group">
-            <label for="coordinator_name">Impairment Coordinator Name <span class="req">*</span></label>
-            <input type="text" id="coordinator_name" name="coordinator_name" required placeholder="Full Name" />
-          </div>
-          <div class="field-group">
-            <label for="coordinator_phone">Coordinator Phone <span class="req">*</span></label>
-            <input type="tel" id="coordinator_phone" name="coordinator_phone" required placeholder="(555) 000-0000" />
-          </div>
-          <div class="field-group">
-            <label for="contractor_company">Contractor / Service Company</label>
-            <input type="text" id="contractor_company" name="contractor_company" placeholder="ABC Fire Protection Inc." />
-          </div>
-          <div class="field-group">
-            <label for="contractor_license">Contractor License Number</label>
-            <input type="text" id="contractor_license" name="contractor_license" placeholder="State License #" />
-          </div>
-          <div class="field-group">
-            <label for="contractor_contact">Contractor Contact Name</label>
-            <input type="text" id="contractor_contact" name="contractor_contact" placeholder="Technician Name" />
-          </div>
-          <div class="field-group">
-            <label for="contractor_phone">Contractor Phone</label>
-            <input type="tel" id="contractor_phone" name="contractor_phone" placeholder="(555) 000-0000" />
-          </div>
+          <div class="field-group"><label for="coordinator_name">Impairment Coordinator Name <span class="req">*</span></label><input type="text" id="coordinator_name" name="coordinator_name" required placeholder="Full Name" /></div>
+          <div class="field-group"><label for="coordinator_phone">Coordinator Phone <span class="req">*</span></label><input type="tel" id="coordinator_phone" name="coordinator_phone" required placeholder="(555) 000-0000" /></div>
+          <div class="field-group"><label for="contractor_company">Contractor / Service Company</label><input type="text" id="contractor_company" name="contractor_company" placeholder="ABC Fire Protection Inc." /></div>
+          <div class="field-group"><label for="contractor_license">Contractor License Number</label><input type="text" id="contractor_license" name="contractor_license" placeholder="State License #" /></div>
+          <div class="field-group"><label for="contractor_contact">Contractor Contact Name</label><input type="text" id="contractor_contact" name="contractor_contact" placeholder="Technician Name" /></div>
+          <div class="field-group"><label for="contractor_phone">Contractor Phone</label><input type="tel" id="contractor_phone" name="contractor_phone" placeholder="(555) 000-0000" /></div>
         </div>
       </div>
     </div>
-
-    <!-- ── SECTION 4: Notifications & Precautions ── -->
     <div class="form-card">
-      <div class="section-header">
-        <span class="section-num">SEC. 04</span>
-        <h2>Required Notifications &amp; Fire Watch Precautions</h2>
-      </div>
+      <div class="section-header"><span class="section-num">SEC. 04</span><h2>Required Notifications &amp; Fire Watch Precautions</h2></div>
       <div class="section-body">
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">
-          Per <strong>NFPA 25 § 15.5</strong>, confirm that all required parties have been notified and applicable precautions are in place.
-          Check all that apply.
-        </p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">Per <strong>NFPA 25 § 15.5</strong>, confirm that all required parties have been notified and applicable precautions are in place. Check all that apply.</p>
         <div class="checklist">
-          <label class="check-item">
-            <input type="checkbox" name="notified_fire_dept" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">🚒 Fire Department Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.1</span></div>
-              <div class="check-item-desc">Local AHJ / fire department has been informed of the impairment and expected duration</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="notified_insurance" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">🏢 Insurance Carrier Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div>
-              <div class="check-item-desc">Property insurance carrier / insurer has been notified of the impaired system</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="notified_alarm" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">🔔 Alarm / Monitoring Company Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.3</span></div>
-              <div class="check-item-desc">Central station or alarm monitoring company informed to prevent false alarm or missed signal</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="notified_occupants" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">👥 Building Occupants Notified</div>
-              <div class="check-item-desc">Tenants, occupants, and relevant building staff have been informed of the impairment</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="fire_watch_established" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">👁️ Fire Watch Established <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div>
-              <div class="check-item-desc">Trained fire watch personnel are continuously patrolling the impaired area for the duration</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="hot_work_suspended" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">🔥 Hot Work Suspended in Impaired Area</div>
-              <div class="check-item-desc">Welding, cutting, grinding, and other ignition-risk activities suspended during impairment</div>
-            </div>
-          </label>
-          <label class="check-item">
-            <input type="checkbox" name="temp_protection_provided" value="Yes" />
-            <div class="check-item-text">
-              <div class="check-item-label">🧯 Temporary Protection / Extinguishers Provided</div>
-              <div class="check-item-desc">Portable fire extinguishers or other temporary suppression measures are staged in the area</div>
-            </div>
-          </label>
+          <label class="check-item"><input type="checkbox" name="notified_fire_dept" value="Yes" /><div class="check-item-text"><div class="check-item-label">🚒 Fire Department Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.1</span></div><div class="check-item-desc">Local AHJ / fire department has been informed of the impairment and expected duration</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_insurance" value="Yes" /><div class="check-item-text"><div class="check-item-label">🏢 Insurance Carrier Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div><div class="check-item-desc">Property insurance carrier / insurer has been notified of the impaired system</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_alarm" value="Yes" /><div class="check-item-text"><div class="check-item-label">🔔 Alarm / Monitoring Company Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.3</span></div><div class="check-item-desc">Central station or alarm monitoring company informed to prevent false alarm or missed signal</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_occupants" value="Yes" /><div class="check-item-text"><div class="check-item-label">👥 Building Occupants Notified</div><div class="check-item-desc">Tenants, occupants, and relevant building staff have been informed of the impairment</div></div></label>
+          <label class="check-item"><input type="checkbox" name="fire_watch_established" value="Yes" /><div class="check-item-text"><div class="check-item-label">👁️ Fire Watch Established <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div><div class="check-item-desc">Trained fire watch personnel are continuously patrolling the impaired area for the duration</div></div></label>
+          <label class="check-item"><input type="checkbox" name="hot_work_suspended" value="Yes" /><div class="check-item-text"><div class="check-item-label">🔥 Hot Work Suspended in Impaired Area</div><div class="check-item-desc">Welding, cutting, grinding, and other ignition-risk activities suspended during impairment</div></div></label>
+          <label class="check-item"><input type="checkbox" name="temp_protection_provided" value="Yes" /><div class="check-item-text"><div class="check-item-label">🧯 Temporary Protection / Extinguishers Provided</div><div class="check-item-desc">Portable fire extinguishers or other temporary suppression measures are staged in the area</div></div></label>
         </div>
-
         <div style="height:20px;"></div>
         <div class="field-grid cols-2">
-          <div class="field-group span-2">
-            <label for="additional_precautions">Additional Precautions Taken / Notes</label>
-            <textarea id="additional_precautions" name="additional_precautions" placeholder="Describe any additional protective measures, special conditions, or notes relevant to this impairment..."></textarea>
-            <span class="field-hint">Include any information that may assist NSR in processing this notification.</span>
-          </div>
+          <div class="field-group span-2"><label for="additional_precautions">Additional Precautions Taken / Notes</label><textarea id="additional_precautions" name="additional_precautions" placeholder="Describe any additional protective measures, special conditions, or notes relevant to this impairment..."></textarea><span class="field-hint">Include any information that may assist NSR in processing this notification.</span></div>
         </div>
       </div>
     </div>
-
-    <!-- ── SUBMIT ── -->
     <div class="submit-area">
-      <div class="submit-notice">
-        <span class="submit-notice-icon">📧</span>
-        <p>
-          Upon submission, <strong>National Safety &amp; Risk</strong> will send an email confirmation to the contact address provided.
-          A follow-up notification will be sent once your impairment has been reviewed and logged in our system.
-          For urgent impairments, contact NSR directly after submitting this form.
-        </p>
-      </div>
+      <div class="submit-notice"><span class="submit-notice-icon">📧</span><p>Upon submission, <strong>National Safety &amp; Risk</strong> will send an email confirmation to the contact address provided. A follow-up notification will be sent once your impairment has been reviewed and logged in our system.</p></div>
       <button type="submit" class="submit-btn">Submit Impairment Notification</button>
-      <div class="submit-meta">
-        NFPA 25 Compliant &nbsp;|&nbsp; All submissions are logged and time-stamped &nbsp;|&nbsp; nationalsafetyandrisk.com
-      </div>
+      <div class="submit-meta">NFPA 25 Compliant &nbsp;|&nbsp; All submissions are logged and time-stamped &nbsp;|&nbsp; nationalsafetyandrisk.com</div>
     </div>
-
   </form>
-
-  <!-- ── SUCCESS MESSAGE (Netlify redirects, but shown for JS fallback) ── -->
-  <div class="success-card" id="successCard">
-    <span class="success-icon">✅</span>
-    <h2>Notification Submitted</h2>
-    <p>Your sprinkler impairment notification has been received by National Safety &amp; Risk. A confirmation email has been sent to the address provided. Our team will review your submission and follow up promptly.</p>
-    <div class="success-ref" id="successRef">Loading reference...</div>
-    <br/>
-    <button class="new-btn" onclick="resetForm()">Submit Another Impairment</button>
-  </div>
-
-</div><!-- end page-wrapper -->
-
-<!-- ── FOOTER ── -->
+</div>
 <footer class="site-footer">
-  <p>
-    © 2025 National Safety &amp; Risk &nbsp;|&nbsp;
-    This form is operated in compliance with <strong>NFPA 25</strong> — Standard for the Inspection, Testing, and Maintenance of Water-Based Fire Protection Systems &nbsp;|&nbsp;
-    <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a>
-  </p>
+  <p>© 2025 National Safety &amp; Risk &nbsp;|&nbsp; NFPA 25 Compliant Impairment Program &nbsp;|&nbsp; <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a></p>
 </footer>
-
 <script>
-  // Generate submission reference number
-  function generateRef() {
-    const d = new Date();
-    const yr = d.getFullYear();
-    const mo = String(d.getMonth()+1).padStart(2,'0');
-    const dy = String(d.getDate()).padStart(2,'0');
-    const rnd = Math.floor(1000 + Math.random() * 9000);
-    return `NSR-IMP-${yr}${mo}${dy}-${rnd}`;
-  }
-
-  // Set default start time to now
+  document.querySelectorAll('.check-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      if (e.target.tagName !== 'INPUT') {
+        var cb = item.querySelector('input[type="checkbox"]');
+        if (cb) cb.checked = !cb.checked;
+      }
+    });
+  });
   (function() {
     const now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
@@ -921,22 +212,6 @@
     const startField = document.getElementById('impairment_start');
     if (startField && !startField.value) startField.value = iso;
   })();
-
-  // Form submission handler
-  const form = document.getElementById('impairmentForm');
-  form.addEventListener('submit', function(e) {
-    // Netlify handles the actual POST; this just shows the success state
-    // if JS intercepts it. For real Netlify deployment, remove e.preventDefault()
-    // and set action="/success" or handle via Netlify's redirect.
-  });
-
-  function resetForm() {
-    document.getElementById('impairmentForm').reset();
-    document.getElementById('successCard').classList.remove('visible');
-    document.getElementById('impairmentForm').style.display = '';
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
 </script>
-
 </body>
 </html>
