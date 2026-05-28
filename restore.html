@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Restoration Notification | National Safety & Risk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:#1B2A4A;--navy-dark:#111C33;--navy-mid:#243557;--steel:#4A6FA5;
+      --sky:#B8CBE4;--sky-light:#D6E4F0;--red:#C0272D;--red-dark:#8B1A1F;
+      --white:#FFFFFF;--off-white:#F4F7FB;--gray:#9AABBD;--text:#1B2A4A;
+      --text-muted:#5B7290;--success:#1A7A4A;--success-light:#E8F5EE;
+      --border:#C8D8E8;--radius:6px;
+      --shadow:0 4px 24px rgba(27,42,74,0.12);--shadow-sm:0 2px 8px rgba(27,42,74,0.08);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Source Serif 4',Georgia,serif;background:var(--navy-dark);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+    .site-header{background:var(--navy);border-bottom:4px solid var(--success);padding:0;}
+    .header-inner{max-width:860px;margin:0 auto;padding:24px 32px;display:flex;align-items:center;gap:24px;}
+    .header-logo{height:60px;width:auto;flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));}
+    .header-text h1{font-family:'Oswald',sans-serif;font-size:1.45rem;font-weight:700;color:var(--white);letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;}
+    .header-text h1 span{color:#6FCF97;display:block;font-weight:400;font-size:0.8rem;letter-spacing:0.12em;margin-top:3px;}
+    .header-badge{background:var(--success);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:500;letter-spacing:0.08em;padding:5px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
+    .page-wrapper{flex:1;max-width:860px;margin:0 auto;width:100%;padding:40px 20px 80px;}
+    .status-banner{background:linear-gradient(135deg,#0F3D22 0%,#1A5C33 100%);border-left:5px solid var(--success);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm);}
+    .status-banner-title{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;color:#6FCF97;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+    .status-banner-title::before{content:'✅';font-size:0.9rem;}
+    .status-banner p{font-size:0.83rem;color:#B7E4C7;line-height:1.6;}
+    .status-banner strong{color:var(--white);}
+    .form-card{background:var(--white);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px;animation:fadeUp 0.4s ease both;}
+    .form-card:nth-child(2){animation-delay:0.08s;}.form-card:nth-child(3){animation-delay:0.16s;}
+    .section-header{background:linear-gradient(135deg,#0F3D22 0%,#1A5C33 100%);padding:16px 28px;display:flex;align-items:center;gap:12px;}
+    .section-header .section-num{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:500;color:#6FCF97;letter-spacing:0.1em;background:rgba(255,255,255,0.1);border:1px solid rgba(111,207,151,0.3);padding:3px 8px;border-radius:3px;flex-shrink:0;}
+    .section-header h2{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;color:var(--white);letter-spacing:0.06em;text-transform:uppercase;}
+    .section-body{padding:28px 28px 24px;}
+    .field-grid{display:grid;gap:20px;}
+    .field-grid.cols-2{grid-template-columns:1fr 1fr;}
+    .field-group{display:flex;flex-direction:column;gap:6px;}
+    .field-group.span-2{grid-column:span 2;}
+    label{font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;color:var(--navy);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+    label .req{color:var(--red);font-size:0.85em;}
+    input,select,textarea{width:100%;font-family:'Source Serif 4',serif;font-size:0.92rem;color:var(--text);background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;outline:none;-webkit-appearance:none;appearance:none;}
+    input:focus,select:focus,textarea:focus{border-color:var(--success);background:var(--white);box-shadow:0 0 0 3px rgba(26,122,74,0.15);}
+    input::placeholder,textarea::placeholder{color:var(--gray);font-style:italic;}
+    select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231A7A4A' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+    textarea{resize:vertical;min-height:90px;line-height:1.55;}
+    .field-hint{font-size:0.74rem;color:var(--text-muted);line-height:1.4;font-style:italic;}
+    .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+    .status-option{display:none;}
+    .status-label{display:flex;align-items:center;gap:14px;padding:16px 18px;border:2px solid var(--border);border-radius:var(--radius);background:var(--off-white);cursor:pointer;transition:all 0.18s;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);}
+    .status-label:hover{border-color:var(--success);background:var(--success-light);}
+    .status-option:checked+.status-label{border-color:var(--success);background:var(--success-light);}
+    .status-icon{font-size:1.8rem;flex-shrink:0;}
+    .status-name{font-family:'Oswald',sans-serif;font-size:0.85rem;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.04em;}
+    .status-desc{font-size:0.72rem;color:var(--text-muted);margin-top:2px;line-height:1.3;}
+    .submit-area{background:linear-gradient(135deg,#0F3D22 0%,#1A5C33 100%);border-radius:10px;padding:32px 28px;box-shadow:var(--shadow);animation:fadeUp 0.4s ease 0.24s both;}
+    .submit-notice{background:rgba(111,207,151,0.15);border:1px solid rgba(111,207,151,0.4);border-radius:var(--radius);padding:12px 18px;margin-bottom:22px;display:flex;align-items:flex-start;gap:10px;}
+    .submit-notice-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+    .submit-notice p{font-size:0.8rem;color:#B7E4C7;line-height:1.55;}
+    .submit-notice strong{color:var(--white);}
+    .submit-btn{width:100%;padding:16px 32px;background:var(--success);color:var(--white);font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;border:none;border-radius:var(--radius);cursor:pointer;transition:background 0.2s,transform 0.1s,box-shadow 0.2s;box-shadow:0 4px 16px rgba(26,122,74,0.35);}
+    .submit-btn:hover{background:#15623C;transform:translateY(-1px);}
+    .submit-meta{margin-top:14px;font-size:0.72rem;color:rgba(255,255,255,0.5);text-align:center;line-height:1.5;font-family:'IBM Plex Mono',monospace;}
+    .site-footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.08);padding:20px 32px;text-align:center;}
+    .site-footer p{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gray);line-height:1.8;}
+    .site-footer a{color:#7494C1;text-decoration:none;}
+    .back-link{display:inline-flex;align-items:center;gap:6px;font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--sky);text-decoration:none;margin-bottom:20px;opacity:0.8;transition:opacity 0.2s;}
+    .back-link:hover{opacity:1;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+    @media(max-width:640px){.header-inner{flex-direction:column;align-items:flex-start;gap:12px;}.field-grid.cols-2{grid-template-columns:1fr;}.field-group.span-2{grid-column:span 1;}.status-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <img src="NSR.png" alt="National Safety & Risk" class="header-logo" />
+    <div class="header-text">
+      <h1>System Restoration Notification<span>NFPA 25 § 15.6 — Impairment Closure</span></h1>
+    </div>
+    <div class="header-badge">RESTORATION</div>
+  </div>
+</header>
+<div class="page-wrapper">
+  <a href="index.html" class="back-link">← Submit New Impairment</a>
+  <div class="status-banner">
+    <div class="status-banner-title">NFPA 25 § 15.6 — Restoration Notification Required</div>
+    <p>Per <strong>NFPA 25</strong>, once an impaired system is restored to full service, the <strong>Impairment Coordinator</strong> must notify all previously contacted parties and confirm the system is back in service. Use this form to close out your impairment with National Safety &amp; Risk.</p>
+  </div>
+  <form name="system-restoration" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="restorationForm">
+    <input type="hidden" name="form-name" value="system-restoration" />
+    <p style="display:none"><input name="bot-field" /></p>
+    <div class="form-card">
+      <div class="section-header"><span class="section-num">SEC. 01</span><h2>Identify the Original Impairment</h2></div>
+      <div class="section-body">
+        <div class="field-grid cols-2">
+          <div class="field-group"><label for="customer_name">Customer / Company Name <span class="req">*</span></label><input type="text" id="customer_name" name="customer_name" required placeholder="Acme Corporation" /></div>
+          <div class="field-group"><label for="property_address">Property Address <span class="req">*</span></label><input type="text" id="property_address" name="property_address" required placeholder="123 Main Street, City, State, ZIP" /></div>
+          <div class="field-group"><label for="original_impairment_date">Original Impairment Start Date <span class="req">*</span></label><input type="date" id="original_impairment_date" name="original_impairment_date" required /></div>
+          <div class="field-group"><label for="system_affected">System / Zone That Was Impaired <span class="req">*</span></label><input type="text" id="system_affected" name="system_affected" required placeholder="e.g. Zone 3 — 2nd Floor East Wing" /></div>
+          <div class="field-group"><label for="contact_name">Contact Name <span class="req">*</span></label><input type="text" id="contact_name" name="contact_name" required placeholder="John Smith" /></div>
+          <div class="field-group"><label for="contact_email">Contact Email <span class="req">*</span></label><input type="email" id="contact_email" name="email" required placeholder="contact@company.com" /></div>
+          <div class="field-group"><label for="contact_phone">Contact Phone <span class="req">*</span></label><input type="tel" id="contact_phone" name="contact_phone" required placeholder="(555) 000-0000" /></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="section-header"><span class="section-num">SEC. 02</span><h2>Restoration Details — NFPA 25 § 15.6</h2></div>
+      <div class="section-body">
+        <div class="field-group" style="margin-bottom:22px;">
+          <label>Restoration Status <span class="req">*</span></label>
+          <div class="status-grid">
+            <div><input type="radio" class="status-option" id="status_restored" name="restoration_status" value="Fully Restored" required /><label for="status_restored" class="status-label"><span class="status-icon">✅</span><div><div class="status-name">Fully Restored</div><div class="status-desc">System is back in full service</div></div></label></div>
+            <div><input type="radio" class="status-option" id="status_partial" name="restoration_status" value="Partially Restored" /><label for="status_partial" class="status-label"><span class="status-icon">🔶</span><div><div class="status-name">Partially Restored</div><div class="status-desc">Some zones restored, work ongoing</div></div></label></div>
+            <div><input type="radio" class="status-option" id="status_extended" name="restoration_status" value="Impairment Extended" /><label for="status_extended" class="status-label"><span class="status-icon">⏰</span><div><div class="status-name">Impairment Extended</div><div class="status-desc">Need more time — updating estimate</div></div></label></div>
+            <div><input type="radio" class="status-option" id="status_emergency" name="restoration_status" value="Emergency — Cannot Restore" /><label for="status_emergency" class="status-label"><span class="status-icon">🚨</span><div><div class="status-name">Cannot Restore</div><div class="status-desc">Emergency — system requires major repair</div></div></label></div>
+          </div>
+        </div>
+        <div class="field-grid cols-2">
+          <div class="field-group"><label for="actual_restoration_time">Actual Restoration Date &amp; Time <span class="req">*</span></label><input type="datetime-local" id="actual_restoration_time" name="actual_restoration_time" required /></div>
+          <div class="field-group"><label for="restored_by">System Restored By <span class="req">*</span></label><input type="text" id="restored_by" name="restored_by" required placeholder="Technician / Company Name" /></div>
+          <div class="field-group"><label for="new_estimated_restoration">New Estimated Restoration (if extended)</label><input type="datetime-local" id="new_estimated_restoration" name="new_estimated_restoration" /><span class="field-hint">Only required if impairment is being extended</span></div>
+          <div class="field-group"><label for="work_performed">Work Performed <span class="req">*</span></label><select id="work_performed" name="work_performed" required><option value="">— Select Work Type —</option><option>Inspection / Testing Completed</option><option>Pipe Repaired</option><option>Pipe Replaced</option><option>Valve Repaired / Replaced</option><option>Sprinkler Heads Replaced</option><option>System Flushed / Refilled</option><option>System Modification Completed</option><option>Temporary Repair — Permanent Repair Pending</option><option>Other (describe below)</option></select></div>
+          <div class="field-group span-2"><label for="restoration_notes">Restoration Notes &amp; Details <span class="req">*</span></label><textarea id="restoration_notes" name="restoration_notes" required placeholder="Describe what work was completed, how the system was restored, any remaining issues, and confirmation that the system has been tested and returned to service..."></textarea></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="section-header"><span class="section-num">SEC. 03</span><h2>Restoration Notifications Completed</h2></div>
+      <div class="section-body">
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">Per <strong>NFPA 25 § 15.6</strong>, confirm all previously notified parties have been informed that the system is restored.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <label style="display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);"><input type="checkbox" name="restored_notified_fire_dept" value="Yes" style="width:18px!important;height:18px!important;min-width:18px;padding:0!important;-webkit-appearance:checkbox!important;appearance:checkbox!important;flex-shrink:0;margin-top:1px;accent-color:var(--success);cursor:pointer;" /><div><div style="font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;color:var(--navy);text-transform:uppercase;">🚒 Fire Department Notified of Restoration</div><div style="font-size:0.73rem;color:var(--text-muted);margin-top:2px;">AHJ / fire department informed system is back in service</div></div></label>
+          <label style="display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);"><input type="checkbox" name="restored_notified_insurance" value="Yes" style="width:18px!important;height:18px!important;min-width:18px;padding:0!important;-webkit-appearance:checkbox!important;appearance:checkbox!important;flex-shrink:0;margin-top:1px;accent-color:var(--success);cursor:pointer;" /><div><div style="font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;color:var(--navy);text-transform:uppercase;">🏢 Insurance Carrier Notified of Restoration</div><div style="font-size:0.73rem;color:var(--text-muted);margin-top:2px;">Property insurer informed impairment has ended</div></div></label>
+          <label style="display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);"><input type="checkbox" name="restored_notified_alarm" value="Yes" style="width:18px!important;height:18px!important;min-width:18px;padding:0!important;-webkit-appearance:checkbox!important;appearance:checkbox!important;flex-shrink:0;margin-top:1px;accent-color:var(--success);cursor:pointer;" /><div><div style="font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;color:var(--navy);text-transform:uppercase;">🔔 Alarm / Monitoring Company Notified</div><div style="font-size:0.73rem;color:var(--text-muted);margin-top:2px;">Central station re-armed and monitoring restored</div></div></label>
+          <label style="display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;font-family:inherit;font-size:inherit;font-weight:inherit;letter-spacing:normal;text-transform:none;color:var(--text);"><input type="checkbox" name="fire_watch_discontinued" value="Yes" style="width:18px!important;height:18px!important;min-width:18px;padding:0!important;-webkit-appearance:checkbox!important;appearance:checkbox!important;flex-shrink:0;margin-top:1px;accent-color:var(--success);cursor:pointer;" /><div><div style="font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;color:var(--navy);text-transform:uppercase;">👁️ Fire Watch Discontinued</div><div style="font-size:0.73rem;color:var(--text-muted);margin-top:2px;">Fire watch personnel stood down upon system restoration</div></div></label>
+        </div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <div class="submit-notice"><span class="submit-notice-icon">📧</span><p>Submitting this form will notify <strong>National Safety &amp; Risk</strong> that your impairment has been closed out. A confirmation email will be sent to your contact address and to the NSR team.</p></div>
+      <button type="submit" class="submit-btn">✅ Confirm System Restoration</button>
+      <div class="submit-meta">NFPA 25 § 15.6 Compliant &nbsp;|&nbsp; All restorations are logged and time-stamped</div>
+    </div>
+  </form>
+</div>
+<footer class="site-footer">
+  <p>© 2025 National Safety &amp; Risk &nbsp;|&nbsp; NFPA 25 Compliant &nbsp;|&nbsp; <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a> &nbsp;|&nbsp; <a href="index.html">← Submit New Impairment</a></p>
+</footer>
+<script>
+  (function() {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    const iso = now.toISOString().slice(0,16);
+    const field = document.getElementById('actual_restoration_time');
+    if (field && !field.value) field.value = iso;
+  })();
+</script>
+</body>
+</html>
