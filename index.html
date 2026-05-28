@@ -28,11 +28,11 @@
     .header-text h1{font-family:'Oswald',sans-serif;font-size:1.65rem;font-weight:700;color:var(--white);letter-spacing:0.04em;text-transform:uppercase;line-height:1.15;}
     .header-text h1 span{color:var(--sky);display:block;font-weight:400;font-size:0.85rem;letter-spacing:0.12em;margin-top:3px;}
     .header-badge{background:var(--red);color:var(--white);font-family:'IBM Plex Mono',monospace;font-size:0.62rem;font-weight:500;letter-spacing:0.08em;padding:5px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;}
-    .nfpa-banner{background:linear-gradient(135deg,var(--navy-mid) 0%,var(--navy) 100%);border-left:5px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm);}
-    .nfpa-banner-title{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;color:var(--sky);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
-    .nfpa-banner-title::before{content:'⚠';font-size:0.9rem;color:var(--red);}
-    .nfpa-banner p{font-size:0.83rem;color:var(--sky-light);line-height:1.6;}
-    .nfpa-banner strong{color:var(--white);}
+    .notice-banner{background:linear-gradient(135deg,var(--navy-mid) 0%,var(--navy) 100%);border-left:5px solid var(--red);border-radius:0 var(--radius) var(--radius) 0;padding:18px 24px;margin-bottom:28px;box-shadow:var(--shadow-sm);}
+    .notice-banner-title{font-family:'Oswald',sans-serif;font-size:0.78rem;font-weight:600;color:var(--sky);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+    .notice-banner-title::before{content:'⚠';font-size:0.9rem;color:var(--red);}
+    .notice-banner p{font-size:0.83rem;color:var(--sky-light);line-height:1.6;}
+    .notice-banner strong{color:var(--white);}
     .form-card{background:var(--white);border-radius:10px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:24px;}
     .section-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:16px 28px;display:flex;align-items:center;gap:12px;}
     .section-header .section-num{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:500;color:var(--sky);letter-spacing:0.1em;background:rgba(255,255,255,0.1);border:1px solid rgba(184,203,228,0.3);padding:3px 8px;border-radius:3px;flex-shrink:0;}
@@ -44,7 +44,6 @@
     .field-group.span-2{grid-column:span 2;}
     label{font-family:'Oswald',sans-serif;font-size:0.72rem;font-weight:600;color:var(--navy);letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
     label .req{color:var(--red);font-size:0.85em;}
-    label .nfpa-ref{font-family:'IBM Plex Mono',monospace;font-size:0.6rem;font-weight:500;color:var(--steel);background:var(--sky-light);border:1px solid var(--border);padding:1px 5px;border-radius:3px;margin-left:4px;}
     input,select,textarea{width:100%;font-family:'Source Serif 4',serif;font-size:0.92rem;color:var(--text);background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--radius);padding:10px 14px;transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;outline:none;-webkit-appearance:none;appearance:none;}
     input:focus,select:focus,textarea:focus{border-color:var(--steel);background:var(--white);box-shadow:0 0 0 3px rgba(74,111,165,0.15);}
     input::placeholder,textarea::placeholder{color:var(--gray);font-style:italic;}
@@ -83,9 +82,10 @@
     .site-footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,0.08);padding:20px 32px;text-align:center;}
     .site-footer p{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gray);line-height:1.8;letter-spacing:0.03em;}
     .site-footer a{color:var(--steel-light);text-decoration:none;}
+    .site-footer a:hover{color:var(--sky);}
     @media(max-width:640px){.header-inner{flex-direction:column;align-items:flex-start;gap:16px;}.field-grid.cols-2{grid-template-columns:1fr;}.field-group.span-2{grid-column:span 1;}.impairment-grid{grid-template-columns:1fr 1fr;}.section-body{padding:20px 18px;}}
     @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-    .form-card,.nfpa-banner,.submit-area{animation:fadeUp 0.45s ease both;}
+    .form-card,.notice-banner,.submit-area{animation:fadeUp 0.45s ease both;}
     .form-card:nth-child(2){animation-delay:0.08s;}.form-card:nth-child(3){animation-delay:0.16s;}.form-card:nth-child(4){animation-delay:0.24s;}.submit-area{animation-delay:0.32s;}
   </style>
 </head>
@@ -96,13 +96,13 @@
     <div class="header-text">
       <h1>Sprinkler System Impairment Notification<span>Fire Protection Impairment Program</span></h1>
     </div>
-    <div class="header-badge">NFPA 25 Compliant</div>
+    <div class="header-badge">NSR Compliant</div>
   </div>
 </header>
 <div class="page-wrapper">
-  <div class="nfpa-banner">
-    <div class="nfpa-banner-title">NFPA 25 — Impairment Notification Requirement</div>
-    <p>Per <strong>NFPA 25 (Standard for the Inspection, Testing, and Maintenance of Water-Based Fire Protection Systems)</strong>, all sprinkler system impairments — planned or emergency — must be reported to the property owner/occupant, the Authority Having Jurisdiction (AHJ), and the monitoring company prior to or immediately upon the start of impairment. This form initiates the required notification process with <strong>National Safety &amp; Risk</strong>.</p>
+  <div class="notice-banner">
+    <div class="notice-banner-title">Impairment Notification Requirement</div>
+    <p>All sprinkler system impairments — planned or emergency — must be reported to the property owner/occupant, the Authority Having Jurisdiction (AHJ), and the monitoring company prior to or immediately upon the start of impairment. This form initiates the required notification process with <strong>National Safety &amp; Risk</strong>.</p>
   </div>
   <form name="sprinkler-impairment" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="impairmentForm">
     <input type="hidden" name="form-name" value="sprinkler-impairment" />
@@ -127,7 +127,7 @@
       <div class="section-header"><span class="section-num">SEC. 02</span><h2>Impairment Classification &amp; Details</h2></div>
       <div class="section-body">
         <div class="field-group" style="margin-bottom:22px;">
-          <label>Impairment Type <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.2</span></label>
+          <label>Impairment Type <span class="req">*</span></label>
           <div class="impairment-grid">
             <div><input type="radio" class="impairment-option" id="type_planned" name="impairment_type" value="Planned Impairment" required /><label for="type_planned" class="impairment-label"><span class="impairment-icon">📅</span><span class="impairment-name">Planned</span><span class="impairment-desc">Scheduled maintenance, testing, or system work</span></label></div>
             <div><input type="radio" class="impairment-option" id="type_emergency" name="impairment_type" value="Emergency Impairment" /><label for="type_emergency" class="impairment-label"><span class="impairment-icon">🚨</span><span class="impairment-name">Emergency</span><span class="impairment-desc">Unplanned break, leak, or system failure</span></label></div>
@@ -139,12 +139,12 @@
         </div>
         <div class="section-divider"></div>
         <div class="field-grid cols-2">
-          <div class="field-group"><label for="system_affected">System / Zone Affected <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.3</span></label><input type="text" id="system_affected" name="system_affected" required placeholder="e.g. Zone 3 — 2nd Floor East Wing" /></div>
+          <div class="field-group"><label for="system_affected">System / Zone Affected <span class="req">*</span></label><input type="text" id="system_affected" name="system_affected" required placeholder="e.g. Zone 3 — 2nd Floor East Wing" /></div>
           <div class="field-group"><label for="area_affected">Area / Location Description <span class="req">*</span></label><input type="text" id="area_affected" name="area_affected" required placeholder="e.g. Server Room, Floors 2–4" /></div>
-          <div class="field-group"><label for="heads_affected">Number of Sprinkler Heads Affected <span class="nfpa-ref">NFPA 25 § 15.3.2</span></label><input type="number" id="heads_affected" name="heads_affected" min="0" placeholder="e.g. 24" /></div>
+          <div class="field-group"><label for="heads_affected">Number of Sprinkler Heads Affected</label><input type="number" id="heads_affected" name="heads_affected" min="0" placeholder="e.g. 24" /></div>
           <div class="field-group"><label for="reason_for_impairment">Reason for Impairment <span class="req">*</span></label><select id="reason_for_impairment" name="reason_for_impairment" required><option value="">— Select Reason —</option><option>Annual Inspection / Testing</option><option>Pipe Repair / Replacement</option><option>System Modification / Expansion</option><option>Valve Repair or Replacement</option><option>Pipe Break / Leak</option><option>Freeze Damage</option><option>Construction / Renovation</option><option>Component Failure</option><option>Water Supply Issue</option><option>Other (describe below)</option></select></div>
-          <div class="field-group"><label for="impairment_start">Impairment Start Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label><input type="datetime-local" id="impairment_start" name="impairment_start" required /></div>
-          <div class="field-group"><label for="estimated_restoration">Estimated Restoration Date &amp; Time <span class="req">*</span> <span class="nfpa-ref">NFPA 25 § 15.5</span></label><input type="datetime-local" id="estimated_restoration" name="estimated_restoration" required /></div>
+          <div class="field-group"><label for="impairment_start">Impairment Start Date &amp; Time <span class="req">*</span></label><input type="datetime-local" id="impairment_start" name="impairment_start" required /></div>
+          <div class="field-group"><label for="estimated_restoration">Estimated Restoration Date &amp; Time <span class="req">*</span></label><input type="datetime-local" id="estimated_restoration" name="estimated_restoration" required /></div>
           <div class="field-group span-2"><label for="impairment_description">Detailed Description of Impairment <span class="req">*</span></label><textarea id="impairment_description" name="impairment_description" required placeholder="Describe the nature of the impairment, specific system components affected, work to be performed, and any relevant conditions..."></textarea></div>
         </div>
       </div>
@@ -153,8 +153,8 @@
       <div class="section-header"><span class="section-num">SEC. 03</span><h2>Impairment Coordinator &amp; Contractor Information</h2></div>
       <div class="section-body">
         <div class="coordinator-box">
-          <div class="coordinator-box-title">NFPA 25 § 15.4 — Impairment Coordinator</div>
-          <p style="font-size:0.78rem;color:#7A4A10;line-height:1.5;">NFPA 25 requires the property owner or designated representative to assign an <strong>Impairment Coordinator</strong> responsible for notifying the fire department, insurance carrier, alarm company, and building occupants.</p>
+          <div class="coordinator-box-title">Impairment Coordinator</div>
+          <p style="font-size:0.78rem;color:#7A4A10;line-height:1.5;">The property owner or designated representative must assign an <strong>Impairment Coordinator</strong> responsible for notifying the fire department, insurance carrier, alarm company, and building occupants.</p>
         </div>
         <div style="height:20px;"></div>
         <div class="field-grid cols-2">
@@ -170,13 +170,13 @@
     <div class="form-card">
       <div class="section-header"><span class="section-num">SEC. 04</span><h2>Required Notifications &amp; Fire Watch Precautions</h2></div>
       <div class="section-body">
-        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">Per <strong>NFPA 25 § 15.5</strong>, confirm that all required parties have been notified and applicable precautions are in place. Check all that apply.</p>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:18px;line-height:1.6;">Confirm that all required parties have been notified and applicable precautions are in place. Check all that apply.</p>
         <div class="checklist">
-          <label class="check-item"><input type="checkbox" name="notified_fire_dept" value="Yes" /><div class="check-item-text"><div class="check-item-label">🚒 Fire Department Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.1</span></div><div class="check-item-desc">Local AHJ / fire department has been informed of the impairment and expected duration</div></div></label>
-          <label class="check-item"><input type="checkbox" name="notified_insurance" value="Yes" /><div class="check-item-text"><div class="check-item-label">🏢 Insurance Carrier Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div><div class="check-item-desc">Property insurance carrier / insurer has been notified of the impaired system</div></div></label>
-          <label class="check-item"><input type="checkbox" name="notified_alarm" value="Yes" /><div class="check-item-text"><div class="check-item-label">🔔 Alarm / Monitoring Company Notified <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.3</span></div><div class="check-item-desc">Central station or alarm monitoring company informed to prevent false alarm or missed signal</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_fire_dept" value="Yes" /><div class="check-item-text"><div class="check-item-label">🚒 Fire Department Notified</div><div class="check-item-desc">Local AHJ / fire department has been informed of the impairment and expected duration</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_insurance" value="Yes" /><div class="check-item-text"><div class="check-item-label">🏢 Insurance Carrier Notified</div><div class="check-item-desc">Property insurance carrier / insurer has been notified of the impaired system</div></div></label>
+          <label class="check-item"><input type="checkbox" name="notified_alarm" value="Yes" /><div class="check-item-text"><div class="check-item-label">🔔 Alarm / Monitoring Company Notified</div><div class="check-item-desc">Central station or alarm monitoring company informed to prevent false alarm or missed signal</div></div></label>
           <label class="check-item"><input type="checkbox" name="notified_occupants" value="Yes" /><div class="check-item-text"><div class="check-item-label">👥 Building Occupants Notified</div><div class="check-item-desc">Tenants, occupants, and relevant building staff have been informed of the impairment</div></div></label>
-          <label class="check-item"><input type="checkbox" name="fire_watch_established" value="Yes" /><div class="check-item-text"><div class="check-item-label">👁️ Fire Watch Established <span class="nfpa-ref" style="font-size:0.6rem;">§ 15.5.2</span></div><div class="check-item-desc">Trained fire watch personnel are continuously patrolling the impaired area for the duration</div></div></label>
+          <label class="check-item"><input type="checkbox" name="fire_watch_established" value="Yes" /><div class="check-item-text"><div class="check-item-label">👁️ Fire Watch Established</div><div class="check-item-desc">Trained fire watch personnel are continuously patrolling the impaired area for the duration</div></div></label>
           <label class="check-item"><input type="checkbox" name="hot_work_suspended" value="Yes" /><div class="check-item-text"><div class="check-item-label">🔥 Hot Work Suspended in Impaired Area</div><div class="check-item-desc">Welding, cutting, grinding, and other ignition-risk activities suspended during impairment</div></div></label>
           <label class="check-item"><input type="checkbox" name="temp_protection_provided" value="Yes" /><div class="check-item-text"><div class="check-item-label">🧯 Temporary Protection / Extinguishers Provided</div><div class="check-item-desc">Portable fire extinguishers or other temporary suppression measures are staged in the area</div></div></label>
         </div>
@@ -189,12 +189,12 @@
     <div class="submit-area">
       <div class="submit-notice"><span class="submit-notice-icon">📧</span><p>Upon submission, <strong>National Safety &amp; Risk</strong> will send an email confirmation to the contact address provided. A follow-up notification will be sent once your impairment has been reviewed and logged in our system.</p></div>
       <button type="submit" class="submit-btn">Submit Impairment Notification</button>
-      <div class="submit-meta">NFPA 25 Compliant &nbsp;|&nbsp; All submissions are logged and time-stamped &nbsp;|&nbsp; nationalsafetyandrisk.com</div>
+      <div class="submit-meta">All submissions are logged and time-stamped &nbsp;|&nbsp; nationalsafetyandrisk.com</div>
     </div>
   </form>
 </div>
 <footer class="site-footer">
-  <p>© 2025 National Safety &amp; Risk &nbsp;|&nbsp; NFPA 25 Compliant Impairment Program &nbsp;|&nbsp; <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a></p>
+  <p>© 2025 National Safety &amp; Risk &nbsp;|&nbsp; NSR Impairment Management Program &nbsp;|&nbsp; <a href="mailto:pnephin@natsr.com">pnephin@natsr.com</a> &nbsp;|&nbsp; <a href="restore.html">System Restored? Submit Restoration Notification →</a></p>
 </footer>
 <script>
   document.querySelectorAll('.check-item').forEach(function(item) {
