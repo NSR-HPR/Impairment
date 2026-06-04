@@ -268,7 +268,7 @@ function buildPDF(d) {
 }
 
 // ── Netlify handler ───────────────────────────────────────────────────────────
-export default async (req) => {
+export default async (req, context) => {
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "POST only" }), { status: 405 });
   }
@@ -278,14 +278,25 @@ export default async (req) => {
   catch { return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400 }); }
 
   try {
-    const data    = mapFields(body);
-    const pdfBuf  = await buildPDF(data);
-    const base64  = pdfBuf.toString("base64");
-    const filename = `NSR-Impairment-${(data.customer_name).replace(/\s+/g,"-")}-${Date.now()}.pdf`;
+    const { getStore } = await import("@netlify/blobs");
+    const data     = mapFields(body);
+    const pdfBuf   = await buildPDF(data);
+    const filename = `NSR-Impairment-${data.customer_name.replace(/\s+/g,"-")}-${Date.now()}.pdf`;
+    const key      = `pdfs/${filename}`;
+
+    // Store PDF in Netlify Blobs (public)
+    const store = getStore({ name: "impairment-pdfs", consistency: "strong" });
+    await store.set(key, pdfBuf, {
+      metadata: { contentType: "application/pdf" },
+    });
+
+    // Build public URL
+    const siteUrl = "https://impairment.netlify.app";
+    const pdf_url = `${siteUrl}/.netlify/blobs/${encodeURIComponent(key)}?store=impairment-pdfs`;
 
     return new Response(JSON.stringify({
-      success:      true,
-      pdf_base64:   base64,
+      success:       true,
+      pdf_url,
       filename,
       customer_name: data.customer_name,
       contact_email: data.contact_email,
