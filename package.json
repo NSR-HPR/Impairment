@@ -1,0 +1,8 @@
+{
+  "name": "nsr-impairment",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "pdfkit": "^0.15.0"
+  }
+}
