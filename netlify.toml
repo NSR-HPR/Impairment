@@ -1,6 +1,5 @@
 [build]
   publish = "."
-  command = "pip install reportlab"
   functions = "netlify/functions"
 
 [[redirects]]
@@ -10,4 +9,3 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  PYTHON_VERSION = "3.9"
