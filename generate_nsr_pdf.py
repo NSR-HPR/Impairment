@@ -268,7 +268,7 @@ function buildPDF(d) {
 }
 
 // ── Netlify handler ───────────────────────────────────────────────────────────
-export default async (req, context) => {
+export default async (req) => {
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "POST only" }), { status: 405 });
   }
@@ -278,31 +278,20 @@ export default async (req, context) => {
   catch { return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400 }); }
 
   try {
-    const { getStore } = await import("@netlify/blobs");
     const data     = mapFields(body);
     const pdfBuf   = await buildPDF(data);
-    const filename = `NSR-Impairment-${data.customer_name.replace(/\s+/g,"-")}-${Date.now()}.pdf`;
-    const key      = `pdfs/${filename}`;
+    const filename = `NSR-Impairment-${data.customer_name.replace(/\s+/g,"-")}.pdf`;
 
-    // Store PDF in Netlify Blobs (public)
-    const store = getStore({ name: "impairment-pdfs", consistency: "strong" });
-    await store.set(key, pdfBuf, {
-      metadata: { contentType: "application/pdf" },
-    });
-
-    // Build public URL
-    const siteUrl = "https://impairment.netlify.app";
-    const pdf_url = `${siteUrl}/.netlify/blobs/${encodeURIComponent(key)}?store=impairment-pdfs`;
-
-    return new Response(JSON.stringify({
-      success:       true,
-      pdf_url,
-      filename,
-      customer_name: data.customer_name,
-      contact_email: data.contact_email,
-    }), {
+    // Return PDF directly as binary — Zapier "File" step can fetch this URL
+    return new Response(pdfBuf, {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type":        "application/pdf",
+        "Content-Disposition": `attachment; filename="${filename}"`,
+        "X-Customer-Name":     data.customer_name,
+        "X-Contact-Email":     data.contact_email,
+        "X-Filename":          filename,
+      },
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message, stack: err.stack }), { status: 500 });
